@@ -7,7 +7,7 @@ echo ================================================
 echo.
 
 SET BUILD_DIR=S:\Softwares\DBS\CaplaDBs-build
-SET SOURCE_DIR=S:\Softwares\DBS\CaplaDBS-project
+SET SOURCE_DIR=S:\Softwares\DBS\CaplaDBS
 SET SLICER_BUILD=S:\Softwares\DBS\Slicer-build
 
 :: -------------------------------------------------------
