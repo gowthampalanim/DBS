@@ -1,0 +1,170 @@
+/* ============================================================
+   Capla DBS — Global Qt Stylesheet
+   Brand colors extracted from Capla logo:
+     Dark navy:   #0A2A5E
+     Primary blue:#0066CC
+     Mid blue:    #1E88E5
+     Light blue:  #29B6F6
+     Background:  #F4F6FA
+     Border:      #C5D3E8
+     Text:        #1A2B4A
+============================================================ */
+
+/* --- Base --- */
+QWidget {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11pt;
+    color: #1A2B4A;
+    background-color: #F4F6FA;
+}
+
+/* --- Buttons --- */
+QPushButton {
+    background-color: #0066CC;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #004FA3;
+}
+QPushButton:pressed {
+    background-color: #0A2A5E;
+}
+QPushButton:disabled {
+    background-color: #C5D3E8;
+    color: #8A9BBB;
+}
+
+/* --- GroupBox --- */
+QGroupBox {
+    border: 1px solid #C5D3E8;
+    border-radius: 6px;
+    margin-top: 0.6em;
+    font-weight: bold;
+    color: #0066CC;
+    background-color: #FFFFFF;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    color: #0066CC;
+}
+
+/* --- Tabs --- */
+QTabWidget::pane {
+    border: 1px solid #C5D3E8;
+    background-color: #FFFFFF;
+}
+QTabBar::tab {
+    background-color: #E8EEF7;
+    color: #1A2B4A;
+    padding: 6px 16px;
+    border: 1px solid #C5D3E8;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+QTabBar::tab:selected {
+    background-color: #0066CC;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+QTabBar::tab:hover:!selected {
+    background-color: #C5D3E8;
+}
+
+/* --- Input fields --- */
+QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    background-color: #FFFFFF;
+    border: 1px solid #C5D3E8;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #1A2B4A;
+    selection-background-color: #0066CC;
+    selection-color: #FFFFFF;
+}
+QLineEdit:focus, QTextEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
+    border: 1px solid #0066CC;
+}
+
+/* --- ComboBox dropdown --- */
+QComboBox::drop-down {
+    border: none;
+    padding-right: 6px;
+}
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C5D3E8;
+    selection-background-color: #0066CC;
+    selection-color: #FFFFFF;
+}
+
+/* --- Checkboxes & Radio buttons --- */
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: #0066CC;
+    border: 1px solid #0066CC;
+    border-radius: 3px;
+}
+QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+    background-color: #FFFFFF;
+    border: 1px solid #C5D3E8;
+    border-radius: 3px;
+}
+
+/* --- Scrollbars --- */
+QScrollBar:vertical {
+    background: #F4F6FA;
+    width: 8px;
+    margin: 0;
+}
+QScrollBar::handle:vertical {
+    background: #C5D3E8;
+    border-radius: 4px;
+    min-height: 20px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #0066CC;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+/* --- Toolbar & Menubar --- */
+QMenuBar {
+    background-color: #0A2A5E;
+    color: #FFFFFF;
+}
+QMenuBar::item:selected {
+    background-color: #0066CC;
+}
+QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C5D3E8;
+    color: #1A2B4A;
+}
+QMenu::item:selected {
+    background-color: #0066CC;
+    color: #FFFFFF;
+}
+
+/* --- Status bar --- */
+QStatusBar {
+    background-color: #0A2A5E;
+    color: #FFFFFF;
+    font-size: 10pt;
+}
+
+/* --- Splitter --- */
+QSplitter::handle {
+    background-color: #C5D3E8;
+}
+
+/* --- Labels --- */
+QLabel {
+    color: #1A2B4A;
+    background-color: transparent;
+}

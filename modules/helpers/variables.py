@@ -8,15 +8,46 @@ Created on Sun Jun  9 16:00:43 2019
 
 coordSys = 1
 
-fontSetting = 'font-size: 11pt;font-family: Arial;font-style: normal;'
-fontSettingTitle = 'font-size: 12pt;font-family: Arial;font-style: bold;'
-fontSettingMainTitle = 'font-size: 16pt;font-family: Arial;font-style: bold;'
+# Capla brand colors (from logo)
+CAPLA_BLUE_DARK  = '#0A2A5E'
+CAPLA_BLUE_MID   = '#0066CC'
+CAPLA_BLUE_LIGHT = '#29B6F6'
+CAPLA_BLUE_HOVER = '#004FA3'
+CAPLA_WHITE      = '#FFFFFF'
+CAPLA_BG         = '#F4F6FA'
+CAPLA_BORDER     = '#C5D3E8'
+CAPLA_TEXT       = '#1A2B4A'
+CAPLA_TEXT_LIGHT = '#5A6E8C'
 
-groupboxStyle = 'QGroupBox {font-size: 11pt;font-family: Arial;font-style: normal;border: 1px solid gray;border-radius: 0px;margin-top: 0.5em;'
-groupboxStyleTitle = 'QGroupBox::title {font-size: 11pt;font-family: Arial;font-style: normal;'
+fontSetting = 'font-size: 11pt;font-family: "Segoe UI";font-style: normal;'
+fontSettingTitle = 'font-size: 12pt;font-family: "Segoe UI";font-weight: bold;'
+fontSettingMainTitle = 'font-size: 16pt;font-family: "Segoe UI";font-weight: bold;'
 
-ctkCollapsibleGroupBoxStyle = 'ctkCollapsibleGroupBox {font-size: 11pt;font-family: Arial;font-style: normal;border: 1px solid gray;border-radius: 5px;margin-top: 0.5em;'
-ctkCollapsibleGroupBoxTitle = 'ctkCollapsibleGroupBox::title {font-size: 12pt;font-family: Arial;font-style: bold;'
+groupboxStyle = (
+    'QGroupBox {'
+    'font-size: 11pt;font-family: "Segoe UI";font-weight: bold;'
+    'color: #0066CC;'
+    'border: 1px solid #C5D3E8;border-radius: 6px;margin-top: 0.6em;'
+    'background-color: #F4F6FA;'
+)
+groupboxStyleTitle = (
+    'QGroupBox::title {'
+    'font-size: 11pt;font-family: "Segoe UI";font-weight: bold;'
+    'color: #0066CC;'
+)
+
+ctkCollapsibleGroupBoxStyle = (
+    'ctkCollapsibleGroupBox {'
+    'font-size: 11pt;font-family: "Segoe UI";font-weight: bold;'
+    'color: #0066CC;'
+    'border: 1px solid #C5D3E8;border-radius: 6px;margin-top: 0.6em;'
+    'background-color: #F4F6FA;'
+)
+ctkCollapsibleGroupBoxTitle = (
+    'ctkCollapsibleGroupBox::title {'
+    'font-size: 12pt;font-family: "Segoe UI";font-weight: bold;'
+    'color: #0066CC;'
+)
 
 collapsibleWidth = 450
 defaultTemplateSpace = 'MNI152NLin2009bAsym'

@@ -25,6 +25,7 @@ set(SlicerApp_APPLE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/branding/CaplaDBs.icns")
 set(SlicerApp_WIN_ICON "${CMAKE_CURRENT_SOURCE_DIR}/branding/CaplaDBs.ico")
 set(SlicerApp_DESCRIPTION_SUMMARY "Capla DBS - Deep Brain Stimulation Planning System")
 set(SlicerApp_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(SlicerApp_STYLESHEETS "${CMAKE_CURRENT_SOURCE_DIR}/branding/CaplaDBs.qss")
 
 # --- Slicer Source (set this to where you cloned Slicer) ---
 set(Slicer_DIR "" CACHE PATH "Path to Slicer build directory")

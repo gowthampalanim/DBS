@@ -19,91 +19,108 @@ class HomeWidget(ScriptedLoadableModuleWidget):
     def setup(self):
         ScriptedLoadableModuleWidget.setup(self)
 
-        # Main layout
-        layout = qt.QVBoxLayout()
-        self.layout.addLayout(layout)
+        # Outer scroll area so it works on smaller screens
+        scroll = qt.QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(qt.QFrame.NoFrame)
+        scroll.setStyleSheet("background-color: #F4F6FA;")
+        self.layout.addWidget(scroll)
+
+        container = qt.QWidget()
+        scroll.setWidget(container)
+        layout = qt.QVBoxLayout(container)
+        layout.setContentsMargins(40, 30, 40, 30)
+        layout.setSpacing(0)
 
         # Logo
         logoLabel = qt.QLabel()
         logoPath = os.path.join(os.path.dirname(__file__), "Resources/Icons/Home.png")
         if os.path.exists(logoPath):
-            pixmap = qt.QPixmap(logoPath).scaledToWidth(300, qt.Qt.SmoothTransformation)
+            pixmap = qt.QPixmap(logoPath).scaledToWidth(220, qt.Qt.SmoothTransformation)
             logoLabel.setPixmap(pixmap)
         logoLabel.setAlignment(qt.Qt.AlignCenter)
         layout.addWidget(logoLabel)
 
-        # Title
-        titleLabel = qt.QLabel("Capla DBS")
-        titleLabel.setAlignment(qt.Qt.AlignCenter)
-        titleLabel.setStyleSheet("""
-            font-size: 28px;
-            font-weight: bold;
-            color: #1a73e8;
-            margin-top: 10px;
-        """)
-        layout.addWidget(titleLabel)
-
-        # Subtitle
-        subtitleLabel = qt.QLabel("Deep Brain Stimulation Planning System")
-        subtitleLabel.setAlignment(qt.Qt.AlignCenter)
-        subtitleLabel.setStyleSheet("font-size: 14px; color: #555; margin-bottom: 20px;")
-        layout.addWidget(subtitleLabel)
+        # Tagline
+        taglineLabel = qt.QLabel("Transforming the future of neurosurgery")
+        taglineLabel.setAlignment(qt.Qt.AlignCenter)
+        taglineLabel.setStyleSheet(
+            "font-size: 12px; font-family: 'Segoe UI'; color: #5A6E8C; margin-top: 4px; margin-bottom: 24px;"
+        )
+        layout.addWidget(taglineLabel)
 
         # Divider
         line = qt.QFrame()
         line.setFrameShape(qt.QFrame.HLine)
-        line.setStyleSheet("color: #ddd;")
+        line.setStyleSheet("color: #C5D3E8; margin-bottom: 20px;")
         layout.addWidget(line)
 
-        # Quick launch buttons
+        # Section label
+        sectionLabel = qt.QLabel("CLINICAL WORKFLOW")
+        sectionLabel.setAlignment(qt.Qt.AlignCenter)
+        sectionLabel.setStyleSheet(
+            "font-size: 10px; font-family: 'Segoe UI'; font-weight: bold; "
+            "color: #5A6E8C; letter-spacing: 2px; margin-bottom: 12px;"
+        )
+        layout.addWidget(sectionLabel)
+
+        # Workflow buttons
         btnStyle = """
             QPushButton {
-                background-color: #1a73e8;
+                background-color: #0066CC;
                 color: white;
                 border: none;
-                border-radius: 6px;
-                padding: 12px;
+                border-radius: 8px;
+                padding: 14px 20px;
                 font-size: 13px;
+                font-family: 'Segoe UI';
                 font-weight: bold;
-                margin: 4px;
+                margin: 5px 0px;
+                text-align: left;
             }
             QPushButton:hover {
-                background-color: #1557b0;
+                background-color: #004FA3;
+            }
+            QPushButton:pressed {
+                background-color: #0A2A5E;
             }
         """
 
-        importBtn = qt.QPushButton("Import Patient Data")
-        importBtn.setStyleSheet(btnStyle)
-        importBtn.clicked.connect(lambda: slicer.util.selectModule("dataImport"))
-        layout.addWidget(importBtn)
+        buttons = [
+            ("  01  |  Import Patient Data",        "dataImport"),
+            ("  02  |  Frame Detection",             "frameDetect"),
+            ("  03  |  Registration",                "registration"),
+            ("  04  |  Anatomical Landmarks",        "anatomicalLandmarks"),
+            ("  05  |  Pre-operative Planning",      "preopPlanning"),
+            ("  06  |  Intra-operative Planning",    "intraopPlanning"),
+            ("  07  |  Post-operative Localization", "postopLocalization"),
+            ("  08  |  Post-operative Programming",  "postopProgramming"),
+        ]
 
-        planBtn = qt.QPushButton("Pre-operative Planning")
-        planBtn.setStyleSheet(btnStyle)
-        planBtn.clicked.connect(lambda: slicer.util.selectModule("preopPlanning"))
-        layout.addWidget(planBtn)
+        for label, module in buttons:
+            btn = qt.QPushButton(label)
+            btn.setStyleSheet(btnStyle)
+            btn.setMinimumHeight(46)
+            btn.clicked.connect(lambda _, m=module: slicer.util.selectModule(m))
+            layout.addWidget(btn)
 
-        frameBtn = qt.QPushButton("Frame Detection")
-        frameBtn.setStyleSheet(btnStyle)
-        frameBtn.clicked.connect(lambda: slicer.util.selectModule("frameDetect"))
-        layout.addWidget(frameBtn)
-
-        intraBtn = qt.QPushButton("Intra-operative Planning")
-        intraBtn.setStyleSheet(btnStyle)
-        intraBtn.clicked.connect(lambda: slicer.util.selectModule("intraopPlanning"))
-        layout.addWidget(intraBtn)
-
-        postBtn = qt.QPushButton("Post-operative Localization")
-        postBtn.setStyleSheet(btnStyle)
-        postBtn.clicked.connect(lambda: slicer.util.selectModule("postopLocalization"))
-        layout.addWidget(postBtn)
+        # Data View secondary button
+        dataViewStyle = btnStyle.replace("#0066CC", "#29B6F6").replace("#004FA3", "#0066CC").replace("#0A2A5E", "#004FA3")
+        dataViewBtn = qt.QPushButton("  Data View")
+        dataViewBtn.setStyleSheet(dataViewStyle)
+        dataViewBtn.setMinimumHeight(40)
+        dataViewBtn.clicked.connect(lambda: slicer.util.selectModule("dataView"))
+        layout.addSpacing(8)
+        layout.addWidget(dataViewBtn)
 
         layout.addStretch()
 
         # Footer
-        footerLabel = qt.QLabel("© 2025 Capla Medical Pvt Ltd, Bangalore")
+        footerLabel = qt.QLabel("© 2025 Capla Medical Pvt Ltd, Bangalore  |  For clinical investigation use only")
         footerLabel.setAlignment(qt.Qt.AlignCenter)
-        footerLabel.setStyleSheet("font-size: 10px; color: #aaa; margin-top: 10px;")
+        footerLabel.setStyleSheet(
+            "font-size: 10px; font-family: 'Segoe UI'; color: #5A6E8C; margin-top: 20px;"
+        )
         layout.addWidget(footerLabel)
 
-        # Set window title
         slicer.util.mainWindow().setWindowTitle("Capla DBS")
