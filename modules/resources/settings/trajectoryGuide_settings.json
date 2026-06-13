@@ -1,0 +1,17 @@
+{
+    "default_dir": "/home/greydon/Documents/data/moncton/derivatives/trajGuide/bids",
+    "surgical_targets": [
+        "STN",
+        "GPi",
+        "Zi",
+        "Vim",
+        "ANT"
+    ],
+    "surgeons": [
+        "Parrent, Andrew",
+        "MacDougall, Keith",
+        "Hebb, Matthew",
+        "Lau, Jon",
+        "Smith, John"
+    ]
+}
