@@ -18,19 +18,19 @@ echo [STEP 1] Checking prerequisites...
 where cmake >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] CMake not found. Install from https://cmake.org/download/
-    pause & exit /b 1
+    exit /b 1
 )
 
 where git >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Git not found. Install from https://git-scm.com/
-    pause & exit /b 1
+    exit /b 1
 )
 
 where python >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Python not found. Install from https://python.org
-    pause & exit /b 1
+    exit /b 1
 )
 
 echo [OK] Prerequisites found.
@@ -40,7 +40,7 @@ echo.
 :: STEP 2 - Install cookiecutter if needed
 :: -------------------------------------------------------
 echo [STEP 2] Installing cookiecutter...
-pip install cookiecutter jinja2-github --quiet
+where pip >nul 2>&1 && pip install cookiecutter jinja2-github --quiet
 echo [OK] cookiecutter ready.
 echo.
 
@@ -48,8 +48,8 @@ echo.
 :: STEP 3 - Clone Slicer source if not present
 :: -------------------------------------------------------
 echo [STEP 3] Checking Slicer source...
-IF NOT EXIST "%SLICER_BUILD%\..\Slicer-source" (
-    echo Cloning Slicer source (~5GB, this will take a while)...
+IF NOT EXIST "S:\Softwares\DBS\Slicer-source" (
+    echo Cloning Slicer source ~5GB, this will take a while...
     git clone https://github.com/Slicer/Slicer.git S:\Softwares\DBS\Slicer-source
 ) ELSE (
     echo [OK] Slicer source already present.
@@ -73,12 +73,13 @@ cd /d "%SLICER_BUILD%"
 cmake -G "Visual Studio 17 2022" -A x64 ^
   -DSlicer_RELEASE_TYPE:STRING=Stable ^
   -DCMAKE_BUILD_TYPE:STRING=Release ^
+  -DQt5_DIR:PATH=C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5 ^
   S:\Softwares\DBS\Slicer-source
 
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Slicer CMake configuration failed.
     echo Try Visual Studio 2019: change "Visual Studio 17 2022" to "Visual Studio 16 2019"
-    pause & exit /b 1
+    exit /b 1
 )
 echo [OK] Slicer configured.
 echo.
@@ -92,7 +93,7 @@ cmake --build . --config Release -- /maxcpucount
 
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Slicer build failed. Check error above.
-    pause & exit /b 1
+    exit /b 1
 )
 echo [OK] Slicer built successfully.
 echo.
@@ -109,7 +110,7 @@ cmake -G "Visual Studio 17 2022" -A x64 ^
 
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Capla DBS CMake configuration failed.
-    pause & exit /b 1
+    exit /b 1
 )
 echo [OK] Capla DBS configured.
 echo.
@@ -122,7 +123,7 @@ cmake --build . --config Release -- /maxcpucount
 
 IF %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Capla DBS build failed.
-    pause & exit /b 1
+    exit /b 1
 )
 
 echo.
@@ -131,4 +132,3 @@ echo   BUILD COMPLETE!
 echo   Capla DBS executable at:
 echo   %BUILD_DIR%\Release\CaplaDBs.exe
 echo ================================================
-pause
